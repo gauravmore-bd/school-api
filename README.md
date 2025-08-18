@@ -1,126 +1,153 @@
-# 📚 School Management API
+# School Management API
 
-A simple Node.js + Express + MySQL API to manage schools and fetch them sorted by distance from a given location.
+This is a Node.js + Express API to manage schools and calculate
+distances between a given location and stored schools using MySQL.
 
----
+## Features
 
-## 🚀 Features
-- Add new schools with **name, address, latitude, longitude**.  
-- Retrieve all schools sorted by **distance** from provided coordinates.  
-- Uses **MySQL** as the database.  
-- Built with **Express** and **async/await** for clean error handling.  
+-   Add a new school with name, address, latitude, and longitude
+-   Fetch all schools sorted by distance from a given location
+-   Uses MySQL database for storage
+-   Built with MVC structure for clean separation of concerns
 
----
+## Project Structure
 
-## ⚙️ Tech Stack
-- **Node.js** (Express.js)  
-- **MySQL (mysql2)**  
-- **dotenv** for environment variables  
+    ├── config
+    │   └── db.js            # Database connection setup
+    ├── controllers
+    │   └── school_controllers.js
+    ├── models
+    │   └── school_model.js
+    ├── routes
+    │   └── school_routes.js
+    ├── server.js            # Entry point
+    ├── .env                 # Environment variables
+    └── README.md
 
----
+## Installation & Setup
 
-## 📂 Project Structure
-```bash
-school-api/
-│── config/ # Database connection
-│── controllers/ # Request handlers
-│── models/ # DB queries
-│── routes/ # API routes
-│── .env # Environment variables
-│── server.js # App entry point
-```
+1.  Clone the repository:
 
----
+    ``` bash
+    git clone <your_repo_url>
+    cd school_api
+    ```
 
-## 🛠️ Setup & Installation
+2.  Install dependencies:
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/school-api.git
-   cd school-api
-```
+    ``` bash
+    npm install
+    ```
 
-Install dependencies:
+3.  Create a `.env` file in the root directory and add the following:
 
-npm install
+    ``` env
+    PORT=3000
+    DB_HOST=localhost
+    DB_USER=root
+    DB_PASSWORD=your_password
+    DB_NAME=school_api
+    DB_PORT=3306
+    ```
 
+4.  Create MySQL database and table:
 
-Configure environment variables in .env:
+    ``` sql
+    CREATE DATABASE school_api;
+    USE school_api;
+    CREATE TABLE schools (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100),
+      address VARCHAR(255),
+      latitude DECIMAL(10, 6),
+      longitude DECIMAL(10, 6)
+    );
+    ```
 
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=school_api
-DB_PORT=3306
+5.  Start the server:
 
+    ``` bash
+    npm start
+    ```
 
-Start the server:
+Server will run on: `http://localhost:3000`
 
-npm start
+## API Endpoints
 
+### 1. Add School
 
-Server will run at:
-👉 http://localhost:3000
+-   **URL:** `POST /addschool`
 
-📌 API Endpoints
-1️⃣ Add a School
+-   **Body:**
 
-POST /addschool
-Request body (JSON):
-
-{
-  "name": "Delhi Public School",
-  "address": "Delhi, India",
-  "latitude": 28.7041,
-  "longitude": 77.1025
-}
-
-
-Response:
-
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "name": "Delhi Public School",
-    "address": "Delhi, India",
-    "latitude": 28.7041,
-    "longitude": 77.1025
-  }
-}
-
-2️⃣ Get Schools Sorted by Distance
-
-GET /getschools?latitude=28.7041&longitude=77.1025
-
-Response:
-
-{
-  "success": true,
-  "count": 2,
-  "data": [
+    ``` json
     {
-      "id": 1,
       "name": "Delhi Public School",
-      "address": "Delhi, India",
+      "address": "Delhi",
       "latitude": 28.7041,
-      "longitude": 77.1025,
-      "distance_km": 0
-    },
-    {
-      "id": 2,
-      "name": "Jaipur School",
-      "address": "Jaipur, India",
-      "latitude": 26.9124,
-      "longitude": 75.7873,
-      "distance_km": 241.33
+      "longitude": 77.1025
     }
-  ]
-}
+    ```
 
-📦 Deliverables
+-   **Response:**
 
-- Source code repository (this repo).
-- Live API endpoints (deployed version on Render/Heroku/Vercel).
-- Postman collection (exported JSON file / shared link).
+    ``` json
+    {
+      "success": true,
+      "data": {
+        "id": 1,
+        "name": "Delhi Public School",
+        "address": "Delhi",
+        "latitude": 28.7041,
+        "longitude": 77.1025
+      }
+    }
+    ```
+
+### 2. Get Schools by Distance
+
+-   **URL:** `GET /getschools?latitude=28.7041&longitude=77.1025`
+
+-   **Response Example:**
+
+    ``` json
+    {
+        "success": true,
+        "count": 3,
+        "data": [
+            {
+                "id": 3,
+                "name": "Delhi Public School",
+                "address": "Delhi",
+                "latitude": 28.7041,
+                "longitude": 77.1025,
+                "distance_km": 0.00009493529796600342
+            },
+            {
+                "id": 1,
+                "name": "Green Valley School",
+                "address": "123 Main Street",
+                "latitude": 28.6139,
+                "longitude": 77.209,
+                "distance_km": 14.442295137429786
+            },
+            {
+                "id": 2,
+                "name": "St. Xavier's",
+                "address": "Mumbai",
+                "latitude": 19.0761,
+                "longitude": 72.8777,
+                "distance_km": 1153.2309450290616
+            }
+        ]
+    }
+    ```
+
+## Deliverables
+
+1.  Source code repository with complete API implementation.
+2.  Live API endpoints accessible for testing (if deployed).
+3.  Postman collection shared via email or link.
+
+------------------------------------------------------------------------
+
