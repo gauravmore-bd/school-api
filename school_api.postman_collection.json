@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "da67d410-c1c8-4b16-bbe9-8b3b90cd90ec",
+		"name": "school_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45395650"
+	},
+	"item": [
+		{
+			"name": "add schools",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "application",
+						"value": "type/Json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Delhi Public School\",\r\n    \"address\": \"Delhi\",\r\n    \"latitude\": 28.7041,\r\n    \"longitude\": 77.1025\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addschool",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addschool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get schools",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "application",
+						"value": "type/Json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/getschools?latitude= 28.7041&longitude= 77.1025",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getschools"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": " 28.7041"
+						},
+						{
+							"key": "longitude",
+							"value": " 77.1025"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
