@@ -7,7 +7,7 @@ exports.addSchool = async ({ name, address, latitude, longitude }) => {
       INSERT INTO schools (name, address, latitude, longitude)
       VALUES (?, ?, ?, ?)
     `;
-    const [res] = await db.promise().query(sql, [name, address, latitude, longitude]);
+    const [res] = await db.query(sql, [name, address, latitude, longitude]);
 
     return {
       id: res.insertId,
@@ -38,7 +38,7 @@ exports.getSchools = async ({ latitude, longitude }) => {
       ORDER BY distance_km ASC
     `;
 
-    const [rows] = await db.promise().query(sql, [latitude, longitude, latitude]);
+    const [rows] = await db.query(sql, [latitude, longitude, latitude]);
     return rows;
 
   } catch (err) {
