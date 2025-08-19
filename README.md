@@ -3,6 +3,11 @@
 This is a Node.js + Express API to manage schools and calculate
 distances between a given location and stored schools using MySQL.
 
+## Deployed live 
+- Link :
+[https://school-api-production-e756.up.railway.app/](https://school-api-production-e756.up.railway.app/)
+
+
 ## Features
 
 -   Add a new school with name, address, latitude, and longitude
@@ -71,6 +76,23 @@ distances between a given location and stored schools using MySQL.
     ```
 
 Server will run on: `http://localhost:3000`
+
+## Deployment (Railway)
+
+1. Push your code to GitHub.
+2. Go to [Railway](https://railway.app/) and create a new project.
+3. Connect your GitHub repository.
+4. Add a **MySQL service** from Railway’s add-ons.
+5. Copy the **MySQL connection URL** and add it as `MYSQL_URL` in your Railway project’s environment variables.
+6. Add `PORT=8080` (Railway assigns port dynamically).
+7. Deploy the project.
+8. Your API will be live at:  
+
+   ```
+   https://<your-railway-subdomain>.up.railway.app/
+   ```
+
+👉 Example Live API: [https://school-api-production-e756.up.railway.app/](https://school-api-production-e756.up.railway.app/)
 
 ## API Endpoints
 
@@ -146,8 +168,7 @@ Server will run on: `http://localhost:3000`
 ## Deliverables
 
 1.  Source code repository with complete API implementation.
-2.  Live API endpoints accessible for testing (if deployed).
-3.  Postman collection shared via email or link.
+2.  Live API endpoints accessible for testing(on Railway)
+3.  Postman collection shared in repo.
 
-------------------------------------------------------------------------
-
+##
