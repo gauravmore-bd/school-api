@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = mysql.createPool({
+  uri: process.env.MYSQL_URL,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -11,7 +12,7 @@ const pool = mysql.createPool({
   port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 const db = pool;
